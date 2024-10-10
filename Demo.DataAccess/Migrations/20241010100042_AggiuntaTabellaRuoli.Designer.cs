@@ -4,6 +4,7 @@ using Demo.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Demo.DataAccess.Migrations
 {
     [DbContext(typeof(DemoDbContext))]
-    partial class DemoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241010100042_AggiuntaTabellaRuoli")]
+    partial class AggiuntaTabellaRuoli
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,58 +112,6 @@ namespace Demo.DataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("Utenti");
-                });
-
-            modelBuilder.Entity("Demo.Model.Utente.UtenteRuolo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("IdRuolo")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdUtente")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdRuolo");
-
-                    b.HasIndex("IdUtente");
-
-                    b.ToTable("UtentiRuoli");
-                });
-
-            modelBuilder.Entity("Demo.Model.Utente.UtenteRuolo", b =>
-                {
-                    b.HasOne("Demo.Model.Utente.Ruolo", "Ruolo")
-                        .WithMany("Utenti")
-                        .HasForeignKey("IdRuolo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Demo.Model.Utente.Utente", "Utente")
-                        .WithMany("Ruoli")
-                        .HasForeignKey("IdUtente")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ruolo");
-
-                    b.Navigation("Utente");
-                });
-
-            modelBuilder.Entity("Demo.Model.Utente.Ruolo", b =>
-                {
-                    b.Navigation("Utenti");
-                });
-
-            modelBuilder.Entity("Demo.Model.Utente.Utente", b =>
-                {
-                    b.Navigation("Ruoli");
                 });
 #pragma warning restore 612, 618
         }
