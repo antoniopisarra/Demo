@@ -1,11 +1,10 @@
-﻿using Audit.EntityFramework;
-using Demo.Model;
+﻿using Demo.Model;
 using Demo.Model.Utente;
 using Microsoft.EntityFrameworkCore;
 
 namespace Demo.DataAccess;
 
-public class DemoDbContext(DbContextOptions<DemoDbContext> options) : AuditDbContext(options)
+public class DemoDbContext(DbContextOptions<DemoDbContext> options) : DbContext(options)
 {
     public DbSet<AuditLog> AuditLogs { get; set; }
     public DbSet<Utente> Utenti { get; set; }
