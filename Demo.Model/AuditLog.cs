@@ -9,5 +9,7 @@ public class AuditLog
     public string ValoriPrecedenti { get; set; }
     public string NuoviValori { get; set; }
     public string Utente { get; set; }
+    public bool Successo { get; set; }
+    public string MessaggioErrore { get; set; }
     public DateTime DataModifica { get; set; }
 }

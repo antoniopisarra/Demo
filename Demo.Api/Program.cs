@@ -1,4 +1,5 @@
 using Demo.DataAccess;
+using Demo.Model;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -16,6 +17,8 @@ namespace Demo.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+
 
             // Aggiungo Database
             builder.Services.AddDbContext<DemoDbContext>(opt =>

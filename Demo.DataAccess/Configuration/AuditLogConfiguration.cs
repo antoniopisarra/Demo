@@ -15,6 +15,7 @@ public class AuditLogConfiguration : IEntityTypeConfiguration<AuditLog>
         builder.Property(log => log.ValoriPrecedenti).IsRequired(false);
         builder.Property(log => log.NuoviValori).IsRequired(false);
         builder.Property(log => log.Utente).IsRequired(false);
+        builder.Property(log => log.MessaggioErrore).IsRequired(false).HasMaxLength(500);
 
     }
 }
