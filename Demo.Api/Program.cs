@@ -1,4 +1,6 @@
 using Demo.DataAccess;
+using Demo.DataServices.Implementation;
+using Demo.DataServices.Interface;
 using Demo.Model;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -28,12 +30,16 @@ namespace Demo.Api
             //Configurazione Logger con scrittura errori su Seq
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Error()
-                .Enrich.FromLogContext()
                 .Enrich.WithProperty("Applicazione","ServerRestAPI")
                 .WriteTo.Seq("http://localhost:5341")
                 .CreateLogger();
 
             builder.Host.UseSerilog();
+
+
+            //Sezione per aggiungere i Services per acesso al database
+            builder.Services.AddScoped<IUtenteDataServices, UtenteDataServices>();
+            builder.Services.AddScoped<IRuoloDataServices, RuoloDataServices>();
 
             var app = builder.Build();
 

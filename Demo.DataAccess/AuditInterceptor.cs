@@ -2,16 +2,45 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using System.Text.Json;
 
 namespace Demo.DataAccess;
 
 public class AuditInterceptor : SaveChangesInterceptor
 {
     private readonly List<AuditLog> _auditLogs = [];
+
     private string GetPrimaryKey(EntityEntry entry)
     {
+        if (entry.State == EntityState.Added)
+        {
+            return 0.ToString();
+        }
         var key = entry.Properties.FirstOrDefault(p => p.Metadata.IsPrimaryKey());
         return key != null ? key.CurrentValue.ToString() : "N/A";
+    }
+
+    private Dictionary<string, object> OttieniValoriPrecedenti(EntityEntry entry)
+    {
+        var valori = new Dictionary<string, object>();
+        foreach (var prop in entry.Properties)
+        {
+            if (prop.IsModified)
+            {
+                valori.Add(prop.Metadata.Name, prop.OriginalValue);
+            }
+        }
+        return valori;
+    }
+
+    private Dictionary<string, object> OttieniNuoviValori(EntityEntry entry)
+    {
+        var valori = new Dictionary<string, object>();
+        foreach (var prop in entry.Properties)
+        {
+            valori.Add(prop.Metadata.Name, prop.CurrentValue);
+        }
+        return valori;
     }
 
     public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result,
@@ -30,8 +59,8 @@ public class AuditInterceptor : SaveChangesInterceptor
                 DataModifica = DateTime.Now,
                 ChiavePrimaria = GetPrimaryKey(x),
                 NomeTabella = eventData.Context.Model.FindEntityType(x.Entity.GetType())?.GetTableName(),
-                ValoriPrecedenti = x.OriginalValues.ToString(),
-                NuoviValori = x.CurrentValues.ToString()
+                ValoriPrecedenti = JsonSerializer.Serialize(OttieniValoriPrecedenti(x)),
+                NuoviValori = JsonSerializer.Serialize(OttieniNuoviValori(x))
             });
 
         if (!audit.Any())

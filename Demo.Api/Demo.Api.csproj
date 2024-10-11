@@ -21,6 +21,7 @@
     <ProjectReference Include="..\Demo.DataAccess\Demo.DataAccess.csproj" />
     <ProjectReference Include="..\Demo.DataServices\Demo.DataServices.csproj" />
     <ProjectReference Include="..\Demo.Logic\Demo.Logic.csproj" />
+    <ProjectReference Include="..\Demo.ModelDto\Demo.ModelDto.csproj" />
     <ProjectReference Include="..\Demo.Model\Demo.Model.csproj" />
   </ItemGroup>
 

@@ -1,18 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Demo.DataServices.Interface;
+using Demo.Logic;
+using Demo.Model.Utente;
+using Demo.ModelDto.Utente;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Demo.Api.Controllers
 {
     [Route("api/[controller]/[action]")]
-    public class TestController : ControllerBase
+    public class TestController(IUtenteDataServices utenteDataServices) : ControllerBase
     {
-        [HttpGet]
-        public async Task<IActionResult> TestSerilog()
+        [HttpPost]
+        public async Task<IActionResult> AggiungiNuovoUtente(NuovoUtenteDto utenteDto)
         {
-            var primoNumero = 1;
-            var secondoNumero = 0;
+            var utente = new Utente
+            {
+                Username = utenteDto.Username,
+                PasswordHash = PasswordHasher.HashPassword(utenteDto.Password)
+            };
+            await utenteDataServices.AggiungiNuovoUtenteAsync(utente);
+            return Ok();
+        }
 
-            return Ok(primoNumero / secondoNumero);
+        [HttpPut]
+        public async Task<IActionResult> AggiornaUtente(Utente utente)
+        {
+            await utenteDataServices.AggiornaUtenteAsync(utente);
+            return Ok();
         }
     }
-
 }
