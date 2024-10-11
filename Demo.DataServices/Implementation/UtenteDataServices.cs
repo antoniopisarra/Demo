@@ -7,11 +7,11 @@ namespace Demo.DataServices.Implementation;
 
 public class UtenteDataServices(DemoDbContext dbContext) : IUtenteDataServices
 {
+    public async Task<bool> VerificaEsistenzaNomeUtenteAsync(string username) =>
+        await dbContext.Utenti.AsNoTracking().AnyAsync(u => u.Username == username);
 
-    public async Task<bool> VerificaEsistenzaNomeUtenteAsync(string username)
-    {
-        return await dbContext.Utenti.AnyAsync(u => u.Username == username);
-    }
+    public async Task<Utente?> OttieniUtenteByUsernameAsync(string username) =>
+        await dbContext.Utenti.AsNoTracking().FirstOrDefaultAsync(u => u.Username == username);
 
     public async Task AggiungiNuovoUtenteAsync(Utente utente)
     {
@@ -21,10 +21,14 @@ public class UtenteDataServices(DemoDbContext dbContext) : IUtenteDataServices
 
     public async Task AggiornaUtenteAsync(Utente utenteModificato)
     {
-        var vecchioUtente = await dbContext.Utenti.FindAsync(utenteModificato.Id);
+        var utente = await dbContext.Utenti.FindAsync(utenteModificato.Id);
 
-        vecchioUtente.PasswordHash = utenteModificato.PasswordHash;
-        vecchioUtente.Username =   utenteModificato.Username;
+        if (utente != null)
+        {
+            utente.PasswordHash = utenteModificato.PasswordHash;
+            utente.Username = utenteModificato.Username;
+        }
+
         await dbContext.SaveChangesAsync();
     }
 }

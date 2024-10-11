@@ -1,7 +1,7 @@
 using Demo.DataAccess;
 using Demo.DataServices.Implementation;
 using Demo.DataServices.Interface;
-using Demo.Model;
+using Demo.Model.AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -20,22 +20,21 @@ namespace Demo.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-
+            //Configurazione di AutoMapper indicazione di dove trovare i profili
+            builder.Services.AddAutoMapper(typeof(UtenteProfile));
 
             // Aggiungo Database
             builder.Services.AddDbContext<DemoDbContext>(opt =>
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("ConnessioneSqlServer")));
 
-
             //Configurazione Logger con scrittura errori su Seq
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Error()
-                .Enrich.WithProperty("Applicazione","ServerRestAPI")
+                .Enrich.WithProperty("Applicazione", "ServerRestAPI")
                 .WriteTo.Seq("http://localhost:5341")
                 .CreateLogger();
 
             builder.Host.UseSerilog();
-
 
             //Sezione per aggiungere i Services per acesso al database
             builder.Services.AddScoped<IUtenteDataServices, UtenteDataServices>();
