@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Text.Json;
+using Demo.AuditService;
 
 namespace Demo.DataAccess;
 
-public class AuditInterceptor : SaveChangesInterceptor
+public class AuditInterceptor(IAuditServices auditServices) : SaveChangesInterceptor
 {
     private readonly List<AuditLog> _auditLogs = [];
 
@@ -60,7 +61,8 @@ public class AuditInterceptor : SaveChangesInterceptor
                 ChiavePrimaria = GetPrimaryKey(x),
                 NomeTabella = eventData.Context.Model.FindEntityType(x.Entity.GetType())?.GetTableName(),
                 ValoriPrecedenti = JsonSerializer.Serialize(OttieniValoriPrecedenti(x)),
-                NuoviValori = JsonSerializer.Serialize(OttieniNuoviValori(x))
+                NuoviValori = JsonSerializer.Serialize(OttieniNuoviValori(x)),
+                Utente = auditServices.OttieniUtenteCollegato()
             });
 
         if (!audit.Any())

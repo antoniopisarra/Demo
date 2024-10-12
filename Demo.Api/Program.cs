@@ -88,6 +88,9 @@ namespace Demo.Api
             //Gestione dei Ruoli
             builder.Services.AddAuthorization();
 
+            //Gestione degli utenti collegati
+            builder.Services.AddHttpContextAccessor();
+
             //Registrazione della classe per la creazione dei Bearer Token
             builder.Services.AddSingleton<JwtService>();
 

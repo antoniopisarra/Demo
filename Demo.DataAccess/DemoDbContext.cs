@@ -1,13 +1,14 @@
-﻿using Demo.Model;
+﻿using Demo.AuditService;
+using Demo.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Demo.DataAccess;
 
-public class DemoDbContext(DbContextOptions<DemoDbContext> options) : DbContext(options)
+public class DemoDbContext(DbContextOptions<DemoDbContext> options, IAuditServices auditServices) : DbContext(options)
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.AddInterceptors(new AuditInterceptor());
+        optionsBuilder.AddInterceptors(new AuditInterceptor(auditServices));
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
