@@ -13,22 +13,18 @@ public class ArticoloDataServices(DemoDbContext dbContext) : IArticoloDataServic
 
     private static readonly Expression<Func<Articolo, ArticoloDto>> ToArticoloDto = articolo => new ArticoloDto
     {
+        Id = articolo.Id,
         NomeArticolo = articolo.NomeArticolo
     };
 
-    #endregion
+    #endregion Proiezioni
 
-    public async Task AggiungiNuovoArticolo(ArticoloDto articoloDto)
+    public async Task AggiungiNuovoArticolo(Articolo articolo)
     {
-        await dbContext.Articoli.AddAsync(new Articolo
-        {
-            NomeArticolo = articoloDto.NomeArticolo
-        });
+        await dbContext.Articoli.AddAsync(articolo);
         await dbContext.SaveChangesAsync();
     }
 
-    public async Task<List<ArticoloDto>> OttieniElencoArticoliDtoAsync()
-    {
-        return await dbContext.Articoli.AsNoTracking().Select(ToArticoloDto).ToListAsync();
-    }
+    public async Task<List<ArticoloDto>> OttieniElencoArticoliDtoAsync() =>
+        await dbContext.Articoli.AsNoTracking().Select(ToArticoloDto).ToListAsync();
 }

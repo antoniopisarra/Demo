@@ -9,6 +9,15 @@ public static class ArticoloMapper
     {
         return new ArticoloDto
         {
+            Id = articolo.Id,
+            NomeArticolo = articolo.NomeArticolo
+        };
+    }
+
+    public static Articolo ToArticolo(this NuovoArticoloDto articolo)
+    {
+        return new Articolo
+        {
             NomeArticolo = articolo.NomeArticolo
         };
     }

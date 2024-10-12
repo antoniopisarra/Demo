@@ -1,7 +1,6 @@
 ﻿namespace Demo.ModelDto.Articolo;
 
-public class ArticoloDto
+public class NuovoArticoloDto
 {
-    public int Id { get; set; }
     public string NomeArticolo { get; set; }
 }

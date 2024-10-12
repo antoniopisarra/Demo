@@ -1,9 +1,10 @@
-﻿using Demo.ModelDto.Articolo;
+﻿using Demo.Model;
+using Demo.ModelDto.Articolo;
 
 namespace Demo.DataServices.Interface;
 
 public interface IArticoloDataServices
 {
-    Task AggiungiNuovoArticolo(ArticoloDto articoloDto);
+    Task AggiungiNuovoArticolo(Articolo articolo);
     Task<List<ArticoloDto>> OttieniElencoArticoliDtoAsync();
 }
