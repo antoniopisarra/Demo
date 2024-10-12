@@ -1,5 +1,4 @@
 ﻿using Demo.Model;
-using Demo.Model.Utente;
 using Microsoft.EntityFrameworkCore;
 
 namespace Demo.DataAccess;

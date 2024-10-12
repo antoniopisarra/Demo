@@ -1,4 +1,4 @@
-﻿namespace Demo.Model.Utente;
+﻿namespace Demo.Model;
 
 public class UtenteRuolo
 {

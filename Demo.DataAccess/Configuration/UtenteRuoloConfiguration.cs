@@ -1,4 +1,4 @@
-﻿using Demo.Model.Utente;
+﻿using Demo.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

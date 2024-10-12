@@ -1,6 +1,6 @@
 ﻿using Demo.DataAccess;
 using Demo.DataServices.Interface;
-using Demo.Model.Utente;
+using Demo.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Demo.DataServices.Implementation;

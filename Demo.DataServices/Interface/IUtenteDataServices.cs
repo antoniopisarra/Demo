@@ -1,4 +1,4 @@
-﻿using Demo.Model.Utente;
+﻿using Demo.Model;
 
 namespace Demo.DataServices.Interface;
 
