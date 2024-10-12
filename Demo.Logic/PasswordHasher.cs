@@ -9,6 +9,6 @@ public static class PasswordHasher
 
     public static bool VerificaPassword(string password, string passwordHash)
     {
-        return BCrypt.Net.BCrypt.Verify(password, passwordHash);
+        return BCrypt.Net.BCrypt.Verify(password.Trim(), passwordHash.Trim());
     }
 }

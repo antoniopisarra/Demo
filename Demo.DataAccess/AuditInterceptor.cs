@@ -23,11 +23,11 @@ public class AuditInterceptor : SaveChangesInterceptor
     private Dictionary<string, object> OttieniValoriPrecedenti(EntityEntry entry)
     {
         var valori = new Dictionary<string, object>();
-        foreach (var prop in entry.Properties)
+        foreach (var property in entry.Properties)
         {
-            if (prop.IsModified)
+            if (property.IsModified)
             {
-                valori.Add(prop.Metadata.Name, prop.OriginalValue);
+                valori.Add(property.Metadata.Name, property.OriginalValue);
             }
         }
         return valori;
@@ -36,15 +36,15 @@ public class AuditInterceptor : SaveChangesInterceptor
     private Dictionary<string, object> OttieniNuoviValori(EntityEntry entry)
     {
         var valori = new Dictionary<string, object>();
-        foreach (var prop in entry.Properties)
+        foreach (var property in entry.Properties)
         {
-            valori.Add(prop.Metadata.Name, prop.CurrentValue);
+            valori.Add(property.Metadata.Name, property.CurrentValue);
         }
         return valori;
     }
 
     public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result,
-        CancellationToken cancellationToken = new CancellationToken())
+        CancellationToken cancellationToken = new())
     {
         if (eventData.Context is null)
         {
@@ -73,7 +73,7 @@ public class AuditInterceptor : SaveChangesInterceptor
     }
 
     public override async ValueTask<int> SavedChangesAsync(SaveChangesCompletedEventData eventData, int result,
-        CancellationToken cancellationToken = new CancellationToken())
+        CancellationToken cancellationToken = new())
     {
         if (eventData.Context is null)
         {

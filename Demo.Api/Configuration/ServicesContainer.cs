@@ -9,5 +9,6 @@ public static class ServicesContainer
     {
         service.AddScoped<IUtenteDataServices, UtenteDataServices>();
         service.AddScoped<IRuoloDataServices, RuoloDataServices>();
+        service.AddScoped<IArticoloDataServices, ArticoloDataServices>();
     }
 }

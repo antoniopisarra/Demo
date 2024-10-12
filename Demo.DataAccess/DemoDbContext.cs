@@ -7,7 +7,6 @@ public class DemoDbContext(DbContextOptions<DemoDbContext> options) : DbContext(
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-
         optionsBuilder.AddInterceptors(new AuditInterceptor());
     }
 
@@ -25,4 +24,6 @@ public class DemoDbContext(DbContextOptions<DemoDbContext> options) : DbContext(
     public DbSet<Ruolo> Ruoli { get; set; }
 
     public DbSet<UtenteRuolo> UtentiRuoli { get; set; }
+
+    public DbSet<Articolo> Articoli { get; set; }
 }
