@@ -5,7 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
-namespace Demo.Api;
+namespace Demo.Api.Configuration;
 
 public class JwtService(IConfiguration configuration)
 {

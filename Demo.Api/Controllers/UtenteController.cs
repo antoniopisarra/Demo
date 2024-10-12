@@ -1,4 +1,5 @@
 ﻿using Demo.DataServices.Interface;
+using Demo.Logic.Mapper;
 using Demo.Model;
 using Demo.ModelDto.Utente;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Demo.Api.Controllers;
 
 [Route("api/[controller]/[action]")]
-public class UtenteDataServices(IUtenteDataServices utenteDataServices) : ControllerBase
+public class UtenteController(IUtenteDataServices utenteDataServices, IRuoloDataServices ruoloDataServices) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> VerificaEsistenzaNomeUtente(string username)
@@ -27,7 +28,7 @@ public class UtenteDataServices(IUtenteDataServices utenteDataServices) : Contro
     [HttpPost]
     public async Task<IActionResult> CreaNuovoUtente([FromBody] NuovoUtenteDto nuovoUtenteDto)
     {
-        //await utenteDataServices.AggiungiNuovoUtenteAsync();
+        await utenteDataServices.AggiungiNuovoUtenteAsync(nuovoUtenteDto.ToUtente(await ruoloDataServices.OttieniElencoRuoliAsync()));
         return Ok();
     }
 }
