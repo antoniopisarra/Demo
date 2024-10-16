@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.AuditService", "Demo.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.HttpRest", "Demo.HttpRest\Demo.HttpRest.csproj", "{70082C1E-6E77-405F-BF7C-0FD93017B2C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Client", "Demo.Client\Demo.Client.csproj", "{3AD2759B-34C2-4007-B033-62FF1C5ADDE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{70082C1E-6E77-405F-BF7C-0FD93017B2C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70082C1E-6E77-405F-BF7C-0FD93017B2C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70082C1E-6E77-405F-BF7C-0FD93017B2C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AD2759B-34C2-4007-B033-62FF1C5ADDE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AD2759B-34C2-4007-B033-62FF1C5ADDE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AD2759B-34C2-4007-B033-62FF1C5ADDE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AD2759B-34C2-4007-B033-62FF1C5ADDE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{719FF2AA-7246-4ACA-8135-3CD138F4BB9E} = {94BA3353-490E-4D95-9117-AC046B59FD5B}
 		{0EB16C2A-876A-4095-888C-CA9ADCB6EEB7} = {94BA3353-490E-4D95-9117-AC046B59FD5B}
 		{70082C1E-6E77-405F-BF7C-0FD93017B2C3} = {C33DC56C-6D07-4F6C-9D5E-130F9829D556}
+		{3AD2759B-34C2-4007-B033-62FF1C5ADDE6} = {C33DC56C-6D07-4F6C-9D5E-130F9829D556}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8B8BEC4F-7FEA-4930-9598-9ECBCCCBFE87}

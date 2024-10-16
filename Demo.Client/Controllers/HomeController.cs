@@ -1,8 +1,8 @@
-using Demo.Frontend.Models;
+using Demo.Client.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Demo.Frontend.Controllers
+namespace Demo.Client.Controllers
 {
     public class HomeController : Controller
     {
@@ -17,6 +17,7 @@ namespace Demo.Frontend.Controllers
         {
             return View();
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

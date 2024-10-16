@@ -1,4 +1,4 @@
-namespace Demo.Frontend.Models
+namespace Demo.Client.Models
 {
     public class ErrorViewModel
     {
