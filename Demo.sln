@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.Logic", "Demo.Logic\De
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.ModelDto", "Demo.ModelDto\Demo.ModelDto.csproj", "{6BB15003-4A6A-4D7E-B4AE-847AB9A735CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.AuditService", "Demo.AuditService\Demo.AuditService.csproj", "{0EB16C2A-876A-4095-888C-CA9ADCB6EEB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.AuditService", "Demo.AuditService\Demo.AuditService.csproj", "{0EB16C2A-876A-4095-888C-CA9ADCB6EEB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.HttpRest", "Demo.HttpRest\Demo.HttpRest.csproj", "{70082C1E-6E77-405F-BF7C-0FD93017B2C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{0EB16C2A-876A-4095-888C-CA9ADCB6EEB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EB16C2A-876A-4095-888C-CA9ADCB6EEB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EB16C2A-876A-4095-888C-CA9ADCB6EEB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70082C1E-6E77-405F-BF7C-0FD93017B2C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70082C1E-6E77-405F-BF7C-0FD93017B2C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70082C1E-6E77-405F-BF7C-0FD93017B2C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70082C1E-6E77-405F-BF7C-0FD93017B2C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{6EE7D62A-34A8-40BC-8747-1F59480B5556} = {94BA3353-490E-4D95-9117-AC046B59FD5B}
 		{719FF2AA-7246-4ACA-8135-3CD138F4BB9E} = {94BA3353-490E-4D95-9117-AC046B59FD5B}
 		{0EB16C2A-876A-4095-888C-CA9ADCB6EEB7} = {94BA3353-490E-4D95-9117-AC046B59FD5B}
+		{70082C1E-6E77-405F-BF7C-0FD93017B2C3} = {C33DC56C-6D07-4F6C-9D5E-130F9829D556}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8B8BEC4F-7FEA-4930-9598-9ECBCCCBFE87}

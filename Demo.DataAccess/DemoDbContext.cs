@@ -27,4 +27,5 @@ public class DemoDbContext(DbContextOptions<DemoDbContext> options, IAuditServic
     public DbSet<UtenteRuolo> UtentiRuoli { get; set; }
 
     public DbSet<Articolo> Articoli { get; set; }
+    public DbSet<LoginLog> LoginLogs { get; set; }
 }

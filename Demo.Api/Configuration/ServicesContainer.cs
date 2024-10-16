@@ -12,5 +12,6 @@ public static class ServicesContainer
         service.AddScoped<IRuoloDataServices, RuoloDataServices>();
         service.AddScoped<IArticoloDataServices, ArticoloDataServices>();
         service.AddScoped<IAuditServices, AuditServices>();
+        service.AddScoped<ILoginLogDataServices, LoginLogDataServices>();
     }
 }

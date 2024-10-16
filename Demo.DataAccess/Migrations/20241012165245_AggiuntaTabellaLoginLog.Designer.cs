@@ -4,6 +4,7 @@ using Demo.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Demo.DataAccess.Migrations
 {
     [DbContext(typeof(DemoDbContext))]
-    partial class DemoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241012165245_AggiuntaTabellaLoginLog")]
+    partial class AggiuntaTabellaLoginLog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,6 +57,10 @@ namespace Demo.DataAccess.Migrations
                     b.Property<DateTime>("DataModifica")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("MessaggioErrore")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<string>("NomeTabella")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -61,6 +68,9 @@ namespace Demo.DataAccess.Migrations
 
                     b.Property<string>("NuoviValori")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Successo")
+                        .HasColumnType("bit");
 
                     b.Property<string>("TipoEvento")
                         .IsRequired()

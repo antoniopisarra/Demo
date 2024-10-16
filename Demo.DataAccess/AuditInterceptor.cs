@@ -1,9 +1,9 @@
-﻿using Demo.Model;
+﻿using Demo.AuditService;
+using Demo.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Text.Json;
-using Demo.AuditService;
 
 namespace Demo.DataAccess;
 
@@ -39,7 +39,10 @@ public class AuditInterceptor(IAuditServices auditServices) : SaveChangesInterce
         var valori = new Dictionary<string, object>();
         foreach (var property in entry.Properties)
         {
-            valori.Add(property.Metadata.Name, property.CurrentValue);
+            if (!property.Metadata.IsKey())
+            {
+                valori.Add(property.Metadata.Name, property.CurrentValue);
+            }
         }
         return valori;
     }
@@ -53,7 +56,7 @@ public class AuditInterceptor(IAuditServices auditServices) : SaveChangesInterce
         }
 
         var audit = eventData.Context.ChangeTracker.Entries()
-            .Where(x => x.Entity is not AuditLog && x.State is EntityState.Added or EntityState.Modified or EntityState.Deleted)
+            .Where(x => x.Entity is not AuditLog && x.Entity is not LoginLog && x.State is EntityState.Added or EntityState.Modified or EntityState.Deleted)
             .Select(x => new AuditLog
             {
                 TipoEvento = x.State.ToString(),
@@ -80,11 +83,6 @@ public class AuditInterceptor(IAuditServices auditServices) : SaveChangesInterce
         if (eventData.Context is null)
         {
             return await base.SavedChangesAsync(eventData, result, cancellationToken);
-        }
-
-        foreach (var log in _auditLogs)
-        {
-            log.Successo = true;
         }
 
         if (_auditLogs.Count > 0)
