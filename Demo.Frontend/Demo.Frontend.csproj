@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Demo.ModelDto\Demo.ModelDto.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Login\" />
+  </ItemGroup>
+
 </Project>
