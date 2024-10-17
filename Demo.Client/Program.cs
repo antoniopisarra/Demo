@@ -1,4 +1,7 @@
+using Demo.Client.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using WebMarkupMin.AspNetCore8;
 
 namespace Demo.Client
@@ -12,7 +15,7 @@ namespace Demo.Client
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            // Add WebMarkupMin services
+            // Estensione per il Minify del codice HTML
             builder.Services.AddWebMarkupMin(options =>
                 {
                     options.AllowMinificationInDevelopmentEnvironment = true;
@@ -37,10 +40,20 @@ namespace Demo.Client
                             return Task.CompletedTask;
                         }
                     };
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = builder.Configuration["JWT:Issuer"],
+                        ValidAudience = builder.Configuration["JWT:Audience"],
+                        IssuerSigningKey =
+                            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]!))
+                    };
                 });
 
             builder.Services.AddAuthorization();
-
+            builder.Services.DataServices();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -54,15 +67,11 @@ namespace Demo.Client
             app.UseWebMarkupMin();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
             app.Run();
         }
     }

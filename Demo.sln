@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.ModelDto", "Demo.Model
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.AuditService", "Demo.AuditService\Demo.AuditService.csproj", "{0EB16C2A-876A-4095-888C-CA9ADCB6EEB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.HttpRest", "Demo.HttpRest\Demo.HttpRest.csproj", "{70082C1E-6E77-405F-BF7C-0FD93017B2C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.HttpRest", "Demo.HttpRest\Demo.HttpRest.csproj", "{70082C1E-6E77-405F-BF7C-0FD93017B2C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Client", "Demo.Client\Demo.Client.csproj", "{3AD2759B-34C2-4007-B033-62FF1C5ADDE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.Client", "Demo.Client\Demo.Client.csproj", "{3AD2759B-34C2-4007-B033-62FF1C5ADDE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Classi", "Demo.Classi\Demo.Classi.csproj", "{BC7645E8-003D-4696-A340-0360891C30AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,10 @@ Global
 		{3AD2759B-34C2-4007-B033-62FF1C5ADDE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AD2759B-34C2-4007-B033-62FF1C5ADDE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AD2759B-34C2-4007-B033-62FF1C5ADDE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC7645E8-003D-4696-A340-0360891C30AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC7645E8-003D-4696-A340-0360891C30AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC7645E8-003D-4696-A340-0360891C30AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC7645E8-003D-4696-A340-0360891C30AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

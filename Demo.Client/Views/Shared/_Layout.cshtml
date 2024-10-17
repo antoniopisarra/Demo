@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Demo.Classi
+<!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="utf-8">
@@ -34,18 +35,36 @@
                 </button>
 
                 @* Links in the navbar *@
+
+
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Login</a>
-                        </li>
+                        @if (User.Identity is { IsAuthenticated: true })
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Account")">
+                                    <i class="fas fa-user"></i> @User.Identity.Name.ToCapitalize()
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Logout","Account")">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Account")">Login</a>
+                            </li>
+                        }
                     </ul>
                 </div>
+
+                
             </div>
         </nav>
     </header>
 
-    <div>
+    <div class="container-fluid">
         <main>
             @RenderBody()
         </main>

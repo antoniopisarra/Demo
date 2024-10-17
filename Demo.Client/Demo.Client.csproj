@@ -19,4 +19,10 @@
     <PackageReference Include="WebMarkupMin.AspNetCore8" Version="2.17.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Demo.Classi\Demo.Classi.csproj" />
+    <ProjectReference Include="..\Demo.HttpRest\Demo.HttpRest.csproj" />
+    <ProjectReference Include="..\Demo.ModelDto\Demo.ModelDto.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -6,12 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="RestSharp" Version="112.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Demo.ModelDto\Demo.ModelDto.csproj" />
-  </ItemGroup>
-
 </Project>
