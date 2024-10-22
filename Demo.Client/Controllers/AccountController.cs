@@ -1,10 +1,11 @@
-﻿using Demo.HttpRest.Interface;
+﻿using Demo.Client.Configuration;
+using Demo.HttpRest.Interface;
 using Demo.ModelDto.Utente;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Demo.Client.Controllers;
 
-public class AccountController(IUtenteRestServices utenteRestServices) : Controller
+public class AccountController(IUtenteRestServices utenteRestServices, JwtService jwtService) : Controller
 {
     [HttpGet]
     public IActionResult Index()
@@ -15,24 +16,30 @@ public class AccountController(IUtenteRestServices utenteRestServices) : Control
     [HttpPost]
     public async Task<IActionResult> Login(LoginUtenteDto loginUtente)
     {
-        var esitoLogin = await utenteRestServices.EffettuaLoginUtente(loginUtente);
-        if (esitoLogin != null)
+        if (ModelState.IsValid)
         {
-            if (esitoLogin.Successo)
+            var esitoLogin = await utenteRestServices.EffettuaLoginUtente(loginUtente);
+            if (esitoLogin != null)
             {
-                Response.Cookies.Append("jwtToken", esitoLogin.Token, new CookieOptions
+                if (esitoLogin.Successo)
                 {
-                    HttpOnly = true,
-                    Secure = false,
-                    Expires = DateTimeOffset.UtcNow.AddHours(1),
-                    Path = "/"
-                });
+                    //Response.Cookies.Append("jwtToken", esitoLogin.Token, new CookieOptions
+                    //{
+                    //    HttpOnly = true,
+                    //    Secure = false,
+                    //    Expires = DateTimeOffset.UtcNow.AddHours(1),
+                    //    Path = "/"
+                    //});
 
-                return RedirectToAction("Index", "Home");
+                    jwtService.AggiungiCookieJwtToken(esitoLogin.Token);
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ModelState.AddModelError(string.Empty, $"{esitoLogin.MessaggioErrore}");
             }
         }
 
-        return Ok();
+        return View("Index", loginUtente);
     }
 
     [HttpGet]
@@ -40,5 +47,11 @@ public class AccountController(IUtenteRestServices utenteRestServices) : Control
     {
         Response.Cookies.Delete("jwtToken");
         return View("LogoutSuccess");
+    }
+
+    [HttpGet]
+    public IActionResult SezioneRiservata()
+    {
+        return View();
     }
 }

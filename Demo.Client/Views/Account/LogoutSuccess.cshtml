@@ -3,31 +3,7 @@
 }
 
 <div class="container text-center mt-5">
-    <h1>Logout effettuato con successo!</h1>
-    <p class="lead">Arrivederci e grazie per aver utilizzato il nostro servizio.</p>
-    <a href="@Url.Action("Index", "Home")" class="btn btn-primary mt-4">Torna alla Home</a>
+    <h1 class="display-4 text-dark">Logout effettuato con successo!</h1>
+    <p class="lead text-secondary">Arrivederci e grazie per aver utilizzato il nostro servizio.</p>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary btn-lg mt-4">Torna alla Home</a>
 </div>
-
-@section Styles {
-    <style>
-        .container {
-            margin-top: 100px;
-        }
-        h1 {
-            font-size: 2.5rem;
-            color: #343a40;
-        }
-        .lead {
-            font-size: 1.2rem;
-            color: #6c757d;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-    </style>
-}

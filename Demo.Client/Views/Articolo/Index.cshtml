@@ -1,0 +1,56 @@
+﻿@model List<Demo.ModelDto.Articolo.ArticoloDto>
+
+@{
+    ViewData["Title"] = "Elenco Articoli";
+}
+
+<div class="container">
+    <h2>Elenco Articoli</h2>
+
+    <!-- Pulsante per aprire il modal -->
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#inserisciArticoloModal">
+        Inserisci Articolo
+    </button>
+
+    <!-- Tabella che mostra gli articoli -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome Articolo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var articolo in Model)
+            {
+                <tr>
+                    <td>@articolo.NomeArticolo</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal per l'inserimento di un nuovo articolo -->
+<div class="modal fade" id="inserisciArticoloModal" tabindex="-1" aria-labelledby="inserisciArticoloLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="inserisciArticoloLabel">Inserisci Nuovo Articolo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Form per inserire il nome dell'articolo -->
+                <form  method="post">
+                    <div class="mb-3">
+                        <label for="nomeArticolo" class="form-label">Nome Articolo</label>
+                        <input type="text" class="form-control" id="nomeArticolo" name="nomeArticolo" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                        <button type="submit" class="btn btn-primary">Salva Articolo</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

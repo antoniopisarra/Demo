@@ -4,10 +4,10 @@ namespace Demo.ModelDto.Utente;
 
 public class LoginUtenteDto
 {
-    [Required]
+    [Required(ErrorMessage = "Username obbligatoria")]
     public string Username { get; set; }
 
-    [Required]
+    [Required(ErrorMessage = "Password obbligatoria")]
     [DataType(DataType.Password)]
     public string Password { get; set; }
 }

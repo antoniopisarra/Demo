@@ -29,6 +29,7 @@ namespace Demo.Client
                 })
                 .AddHttpCompression();
 
+            // Estensione per accettare il token JWT come autenticazione
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -37,6 +38,12 @@ namespace Demo.Client
                         OnMessageReceived = context =>
                         {
                             context.Token = context.HttpContext.Request.Cookies["jwtToken"];
+                            return Task.CompletedTask;
+                        },
+                        OnChallenge = context =>
+                        {
+                            context.HandleResponse();
+                            context.Response.Redirect("/Account/SezioneRiservata");
                             return Task.CompletedTask;
                         }
                     };
@@ -54,6 +61,7 @@ namespace Demo.Client
 
             builder.Services.AddAuthorization();
             builder.Services.DataServices();
+            builder.Services.AddSingleton<JwtService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

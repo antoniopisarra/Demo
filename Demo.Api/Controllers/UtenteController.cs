@@ -51,7 +51,7 @@ public class UtenteController(
         {
             await logDataServices.AggiungiNuovoLoginLogAsync(utenteDto.Username, ipAddress, dataLogin, false,
                 "Username Inesistente", userAgent);
-            return Unauthorized(new EsitoLoginDto
+            return Ok(new EsitoLoginDto
             {
                 Username = utenteDto.Username,
                 Successo = false,
@@ -64,7 +64,7 @@ public class UtenteController(
             await logDataServices.AggiungiNuovoLoginLogAsync(utenteDto.Username, ipAddress, dataLogin, false,
                 "Password Errata", userAgent);
 
-            return Unauthorized(new EsitoLoginDto
+            return Ok(new EsitoLoginDto
             {
                 Username = utenteDto.Username,
                 Successo = false,
