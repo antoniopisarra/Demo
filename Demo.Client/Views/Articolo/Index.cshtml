@@ -17,6 +17,7 @@
         <thead>
             <tr>
                 <th>Nome Articolo</th>
+                <th style="text-align: center">Azioni</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +25,18 @@
             {
                 <tr>
                     <td>@articolo.NomeArticolo</td>
+                    <td class="text-center">
+                        <a data-bs-toggle="tooltip" title="Modifica Articolo" href="@Url.Action("ModificaArticolo", "Articolo", new { id = articolo.Id })" class="btn btn-warning btn-sm">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <form asp-action="EliminaArticolo" asp-controller="Articolo" method="post" style="display: inline;">
+                            <input type="hidden" name="id" value="@articolo.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" title="Cancella Articolo">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </form>
+                    </td>
+
                 </tr>
             }
         </tbody>
@@ -40,7 +53,7 @@
             </div>
             <div class="modal-body">
                 <!-- Form per inserire il nome dell'articolo -->
-                <form  method="post">
+                <form asp-action="CreaArticolo" method="post">
                     <div class="mb-3">
                         <label for="nomeArticolo" class="form-label">Nome Articolo</label>
                         <input type="text" class="form-control" id="nomeArticolo" name="nomeArticolo" required>

@@ -5,6 +5,9 @@ namespace Demo.DataServices.Interface;
 
 public interface IArticoloDataServices
 {
-    Task AggiungiNuovoArticolo(Articolo articolo);
+    Task<Articolo> AggiungiNuovoArticolo(Articolo articolo);
     Task<List<ArticoloDto>> OttieniElencoArticoliDtoAsync();
+    Task EliminaArticoloByIdAsync(int id);
+    Task<ArticoloDto> OttieniArticoloByIdAsync(int id);
+    Task SalvaModificheArticolo(ArticoloDto articoloModificato);
 }

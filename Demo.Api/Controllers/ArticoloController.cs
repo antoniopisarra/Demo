@@ -13,13 +13,33 @@ public class ArticoloController(IArticoloDataServices articoloDataServices) : Co
     [HttpPost]
     public async Task<IActionResult> CreaNuovoArticolo([FromBody] NuovoArticoloDto articolo)
     {
-        await articoloDataServices.AggiungiNuovoArticolo(articolo.ToArticolo());
-        return Ok();
+        var articoloCreato = await articoloDataServices.AggiungiNuovoArticolo(articolo.ToArticolo());
+        return Ok(articoloCreato.ToArticoloDto());
     }
 
     [HttpGet]
     public async Task<IActionResult> OttieniElencoArticoli()
     {
         return Ok(await articoloDataServices.OttieniElencoArticoliDtoAsync());
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> EliminaArticolo(int id)
+    {
+        await articoloDataServices.EliminaArticoloByIdAsync(id);
+        return Ok();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> OttieniArticoloById(int id)
+    {
+        return Ok(await articoloDataServices.OttieniArticoloByIdAsync(id));
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> SalvaModificheArticolo([FromBody] ArticoloDto articoloDto)
+    {
+        await articoloDataServices.SalvaModificheArticolo(articoloDto);
+        return Ok();
     }
 }

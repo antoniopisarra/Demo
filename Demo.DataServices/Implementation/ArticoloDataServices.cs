@@ -19,12 +19,41 @@ public class ArticoloDataServices(DemoDbContext dbContext) : IArticoloDataServic
 
     #endregion Proiezioni
 
-    public async Task AggiungiNuovoArticolo(Articolo articolo)
+    public async Task<Articolo> AggiungiNuovoArticolo(Articolo articolo)
     {
         await dbContext.Articoli.AddAsync(articolo);
         await dbContext.SaveChangesAsync();
+        return articolo;
     }
 
     public async Task<List<ArticoloDto>> OttieniElencoArticoliDtoAsync() =>
         await dbContext.Articoli.AsNoTracking().Select(ToArticoloDto).ToListAsync();
+
+    public async Task EliminaArticoloByIdAsync(int id)
+    {
+        var articolo = await dbContext.Articoli.FindAsync(id);
+
+        if (articolo is not null)
+        {
+            dbContext.Articoli.Remove(articolo);
+        }
+
+        await dbContext.SaveChangesAsync();
+    }
+
+    public async Task<ArticoloDto> OttieniArticoloByIdAsync(int id) =>
+        await dbContext.Articoli.AsNoTracking().Where(a => a.Id == id).Select(ToArticoloDto).FirstAsync();
+
+
+    public async Task SalvaModificheArticolo(ArticoloDto articoloModificato)
+    {
+        var originale = await dbContext.Articoli.FindAsync(articoloModificato.Id);
+
+        if (originale is not null)
+        {
+            originale.NomeArticolo = articoloModificato.NomeArticolo;
+        }
+
+        await dbContext.SaveChangesAsync();
+    }
 }

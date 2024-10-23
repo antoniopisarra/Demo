@@ -22,4 +22,25 @@ public static class DefaultClient
     {
         return request.AddHeader("Authorization", $"Bearer {tokenJwt}");
     }
+
+    public static RestRequest NuovaRequest(string percorso, object body = null, string jwtToken = "")
+    {
+        var request = new RestRequest(percorso);
+
+        if (body is not null)
+        {
+            request.AddJsonBody(body);
+        }
+
+        if (!string.IsNullOrWhiteSpace(jwtToken))
+        {
+            request.AutenticazioneJwt(jwtToken);
+        }
+
+        
+
+        
+
+        return request;
+    }
 }

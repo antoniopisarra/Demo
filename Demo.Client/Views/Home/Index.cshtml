@@ -2,14 +2,20 @@
     ViewData["Title"] = "Home - Progetto DEMO API REST";
 }
 
-<div class="d-flex flex-column justify-content-center align-items-center altezza">
-    <div class="text-center">
+<div class="container">
+    <div class="text-center row">
         <h1 class="mb-4">DEMO API REST - JWT Token</h1>
         <p class="lead">
             Questo progetto è una demo per mostrare come utilizzare i <strong>JWT Token</strong> con
             <strong>ASP.NET Core MVC</strong>, <strong>ASP.NET Core REST API</strong>, e <strong>Entity Framework</strong>.
         </p>
     </div>
+    @if (User.Identity is { IsAuthenticated: true })
+    {
+        <div class="row justify-content-md-center">
+            <a href="@Url.Action("Index", "Articolo")" class="btn btn-primary btn-lg mt-4">Visualizza Articoli</a>
+        </div>
+    }
 </div>
 
 

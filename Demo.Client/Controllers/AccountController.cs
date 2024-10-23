@@ -23,14 +23,6 @@ public class AccountController(IUtenteRestServices utenteRestServices, JwtServic
             {
                 if (esitoLogin.Successo)
                 {
-                    //Response.Cookies.Append("jwtToken", esitoLogin.Token, new CookieOptions
-                    //{
-                    //    HttpOnly = true,
-                    //    Secure = false,
-                    //    Expires = DateTimeOffset.UtcNow.AddHours(1),
-                    //    Path = "/"
-                    //});
-
                     jwtService.AggiungiCookieJwtToken(esitoLogin.Token);
                     return RedirectToAction("Index", "Home");
                 }
@@ -45,7 +37,7 @@ public class AccountController(IUtenteRestServices utenteRestServices, JwtServic
     [HttpGet]
     public IActionResult Logout()
     {
-        Response.Cookies.Delete("jwtToken");
+        jwtService.RimuoviJwtToken();
         return View("LogoutSuccess");
     }
 

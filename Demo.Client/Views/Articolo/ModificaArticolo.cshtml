@@ -1,0 +1,25 @@
+﻿@model Demo.ModelDto.Articolo.ArticoloDto
+
+@{
+    ViewData["Title"] = "Modifica Articolo";
+}
+
+
+<div class="container">
+    <h2>Modifica Articolo</h2>
+    <form asp-action="SalvaModificheArticolo" method="post">
+        <div class="mb-3">
+            <label for="nomeArticolo" class="form-label">Nome Articolo</label>
+            <input type="text" class="form-control" id="nomeArticolo" name="NomeArticolo" value="@Model.NomeArticolo" required>
+            <input type="hidden" name="Id" value="@Model.Id" />
+        </div>
+        <div class="text-end">
+            <a data-bs-toggle="tooltip" title="Annulla" href="@Url.Action("Index", "Articolo")" class="btn btn-secondary">
+                <i class="bi bi-x-octagon"></i>
+            </a>
+            <button data-bs-toggle="tooltip" title="Salva Modifiche" type="submit" class="btn btn-primary">
+                <i class="bi bi-floppy"></i>
+            </button>
+        </div>
+    </form>
+</div>
